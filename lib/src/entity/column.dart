@@ -58,5 +58,3 @@ class DataGridColumn {
           runtimeType == other.runtimeType &&
           id == other.id;
 } // DataGridColumn
-
-

@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
-import 'package:table/src/entity/column.dart';
-import 'package:table/src/entity/options.dart';
 import 'package:table/src/widget/header.dart';
 import 'package:table/table.dart';
 
@@ -25,7 +23,7 @@ class DataGrid extends StatefulWidget {
 
   /// {@macro data_grid.data_grid}
   ///
-  /// [data] must contain toJson method.
+  /// [value] must contain toJson method.
   const DataGrid.value({
     required Object value,
     required List<DataGridColumn> columns,
@@ -92,7 +90,7 @@ class _DataGridState extends State<DataGrid>
               options: widget.options,
             ),
             SliverFixedExtentList(
-              itemExtent: 50.0,
+              itemExtent: 50,
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) => Container(
                   alignment: Alignment.center,

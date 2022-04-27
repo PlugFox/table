@@ -3,6 +3,7 @@ import 'package:meta/meta.dart';
 /// {@template row.data_grid_row}
 /// DataGridRGridRow
 /// {@endtemplate}
+@immutable
 class DataGridRow {
   /// {@macro row.data_grid_row}
   const DataGridRow(Map<String, Object?> data) : _data = data;

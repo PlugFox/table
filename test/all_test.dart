@@ -1,6 +1,5 @@
 // ignore_for_file: unnecessary_lambdas
 
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:table/table.dart';
@@ -24,15 +23,16 @@ void main() {
     });
     test('placeholder', () {
       expect(
-          () => DataGrid.value(
-                value: value,
-                columns: <DataGridColumn>[],
-              ),
-          returnsNormally);
+        () => DataGrid.value(
+          value: value,
+          columns: const <DataGridColumn>[],
+        ),
+        returnsNormally,
+      );
       expect(
         DataGrid.value(
           value: value,
-          columns: <DataGridColumn>[],
+          columns: const <DataGridColumn>[],
         ),
         isA<DataGrid>(),
       );
@@ -43,7 +43,7 @@ void main() {
         await tester.pumpWidget(
           DataGrid.value(
             value: value,
-            columns: <DataGridColumn>[],
+            columns: const <DataGridColumn>[],
           ),
         );
         expect(find.byType(DataGrid), findsOneWidget);

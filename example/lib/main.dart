@@ -46,9 +46,9 @@ class _HomePageState extends State<HomePage> {
           child: ColoredBox(
             color: Colors.red,
             child: DataGrid(
-              columns: [],
+              columns: const <DataGridColumn>[],
               controller: controller,
-              options: DataGridOptions(
+              options: const DataGridOptions(
                 headerPinned: true,
               ),
             ),

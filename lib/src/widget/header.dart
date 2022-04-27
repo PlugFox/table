@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs
-import 'dart:math' as math;
 
 import 'package:flutter/widgets.dart';
 
@@ -59,6 +58,6 @@ class DataGridHeaderDelegate extends SliverPersistentHeaderDelegate {
   ) =>
       PreferredSize(
         preferredSize: Size.fromHeight(height),
-        child: Placeholder(),
+        child: const Placeholder(),
       );
 } // DataGridHeaderDelegate
