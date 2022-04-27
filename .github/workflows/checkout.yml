@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: plugfox/flutter:beta
-      options: --user root
+      #options: --user root
     env:
       working-directory: ./
     timeout-minutes: 10
@@ -57,7 +57,9 @@ jobs:
         run: export PUB_CACHE=/var/tmp/.pub_cache
       
       - name: 👨‍⚕️ Flutter doctor
-        run: flutter doctor
+        run: |
+          git config --global --add safe.directory /opt/flutter
+          flutter doctor
         timeout-minutes: 3
       
       - name: 🚚 Get dependencies
