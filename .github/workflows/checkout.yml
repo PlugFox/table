@@ -76,7 +76,7 @@ jobs:
       
       #- name: Check with pana
       #  run: dart pub global activate pana && pana --json --no-warning --line-length 80
-      - name: Run tests
+      - name: 😓 Run tests
         run: dart test --concurrency=6 --platform vm --coverage=coverage test/
         timeout-minutes: 3
       - name: Collect coverage
@@ -92,16 +92,17 @@ jobs:
           path: |
             analyze.txt
       
-      - name: Upload coverage to Codecov
+      - name: 🌐 Upload coverage to Codecov
         uses: codecov/codecov-action@v2.1.0
         timeout-minutes: 1
         with:
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
       
-      - name: Check Code Coverage
+      - name: 🧐 Check Code Coverage
         uses: VeryGoodOpenSource/very_good_coverage@v1.2.1
         timeout-minutes: 1
         with:
           path: coverage/lcov.info
           min_coverage: 90
           #exclude: '**.g.dart **.freezed.dart'
+    
