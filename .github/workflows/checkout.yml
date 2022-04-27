@@ -43,18 +43,18 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: 🚃 Cache pub modules
-        uses: actions/cache@v2
-        timeout-minutes: 1
-        env:
-          cache-name: cache-pub-modules
-        with:
-          path: |
-            $PWD/.pub_cache/
-          key: ${{ runner.os }}-dart
+      #- name: 🚃 Cache pub modules
+      #  uses: actions/cache@v2
+      #  timeout-minutes: 1
+      #  env:
+      #    cache-name: cache-pub-modules
+      #  with:
+      #    path: |
+      #      $PWD/.pub_cache/
+      #    key: ${{ runner.os }}-dart
 
-      - name: 🗄️ Export pub cache directory
-        run: export PUB_CACHE=/var/tmp/.pub_cache
+      #- name: 🗄️ Export pub cache directory
+      #  run: export PUB_CACHE=/var/tmp/.pub_cache
       
       - name: 👨‍⚕️ Flutter doctor
         run: |
