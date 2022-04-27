@@ -1,0 +1,107 @@
+name: CHECKOUT
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'master'
+      - 'develop'
+      - 'feature/**'
+      - 'bugfix/**'
+      - 'hotfix/**'
+      - 'support/**'
+    paths:
+      - 'lib/**.dart'
+      - 'test/**.dart'
+      - 'example/lib/**.dart'
+  pull_request:
+    branches:
+      - 'master'
+      - 'develop'
+      - 'feature/**'
+      - 'bugfix/**'
+      - 'hotfix/**'
+      - 'support/**'
+    paths:
+      - 'lib/**.dart'
+      - 'test/**.dart'
+      - 'example/lib/**.dart'
+
+jobs:
+  checkout:
+    name: 'Checkout codebase'
+    runs-on: ubuntu-latest
+    container:
+      image: plugfox/flutter:beta
+      options: --user root
+    env:
+      working-directory: ./
+    timeout-minutes: 10
+    steps:
+      - name: 🚂 Get latest code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - name: 🚃 Cache pub modules
+        uses: actions/cache@v2
+        timeout-minutes: 1
+        env:
+          cache-name: cache-pub-modules
+        with:
+          path: |
+            $PWD/.pub_cache/
+          key: ${{ runner.os }}-dart
+
+      - name: 🗄️ Export pub cache directory
+        run: export PUB_CACHE=/var/tmp/.pub_cache
+      
+      - name: 🚚 Get dependencies
+        working-directory: ${{ env.working-directory }}
+        run: flutter pub get
+        timeout-minutes: 1
+
+      - name: 🏗️ Check format
+        working-directory: ${{ env.working-directory }}
+        run: dart format --set-exit-if-changed -l 80 -o none .
+        timeout-minutes: 1
+    
+      - name: ✔️ Check sources with analyzer
+        working-directory: ${{ env.working-directory }}
+        run: |
+          flutter analyze --no-pub --current-package --congratulate \
+            --current-package --no-fatal-infos --fatal-warnings \
+            --no-preamble --write=analyze.txt
+        timeout-minutes: 1
+      
+      #- name: Check with pana
+      #  run: dart pub global activate pana && pana --json --no-warning --line-length 80
+      - name: Run tests
+        run: dart test --concurrency=6 --platform vm --coverage=coverage test/
+        timeout-minutes: 3
+      - name: Collect coverage
+        run: dart run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --packages=.packages --report-on=lib
+        timeout-minutes: 1
+
+      - name: 📁 Upload result
+        uses: actions/upload-artifact@v2
+        with:
+          name: test
+          if-no-files-found: ignore
+          retention-days: 7
+          path: |
+            analyze.txt
+      
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2.1.0
+        timeout-minutes: 1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+      
+      - name: Check Code Coverage
+        uses: VeryGoodOpenSource/very_good_coverage@v1.2.1
+        timeout-minutes: 1
+        with:
+          path: coverage/lcov.info
+          min_coverage: 90
+          #exclude: '**.g.dart **.freezed.dart'
