@@ -82,12 +82,10 @@ jobs:
       
       #- name: Check with pana
       #  run: dart pub global activate pana && pana --json --no-warning --line-length 80
+
       - name: 😓 Run tests
-        run: dart test --concurrency=6 --platform vm --coverage=coverage test/
+        run: flutter test --no-pub --concurrency=6 --coverage test/all_test.dart
         timeout-minutes: 3
-      - name: Collect coverage
-        run: dart run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --packages=.packages --report-on=lib
-        timeout-minutes: 1
 
       - name: 📁 Upload result
         uses: actions/upload-artifact@v2
