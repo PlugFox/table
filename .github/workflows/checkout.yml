@@ -33,9 +33,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: plugfox/flutter:beta
-      #options: --user root
-    env:
-      working-directory: ./
+      options: --user root
+    #env:
+    #  working-directory: ./
     timeout-minutes: 10
     steps:
       - name: 🚂 Get latest code
@@ -63,17 +63,17 @@ jobs:
         timeout-minutes: 3
       
       - name: 🚚 Get dependencies
-        working-directory: ${{ env.working-directory }}
+        #working-directory: ${{ env.working-directory }}
         run: flutter pub get
         timeout-minutes: 1
 
       - name: 🏗️ Check format
-        working-directory: ${{ env.working-directory }}
+        #working-directory: ${{ env.working-directory }}
         run: dart format --set-exit-if-changed -l 80 -o none .
         timeout-minutes: 1
     
       - name: ✔️ Check sources with analyzer
-        working-directory: ${{ env.working-directory }}
+        #working-directory: ${{ env.working-directory }}
         run: |
           flutter analyze --no-pub --current-package --congratulate \
             --current-package --no-fatal-infos --fatal-warnings \
