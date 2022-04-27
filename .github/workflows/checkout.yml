@@ -90,7 +90,7 @@ jobs:
       - name: 📁 Upload result
         uses: actions/upload-artifact@v2
         with:
-          name: test
+          name: checkout
           if-no-files-found: ignore
           retention-days: 7
           path: |
