@@ -2,6 +2,13 @@ name: table
 description: >
   Display tabular data with ease. Perform paging, sorting and filtering without extra code.
 version: 0.0.1-dev
+repository: https://github.com/PlugFox/table
+issue_tracker: https://github.com/PlugFox/table/issues
+homepage: https://github.com/PlugFox/table
+#publish_to: https://pub.dev
+#documentation: https://pub.dev/documentation/table/latest/
+#authors:
+#  - Plague Fox <plugfox@gmail.com>
 
 environment:
   sdk: ">=2.16.0"

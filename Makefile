@@ -7,6 +7,6 @@ help:
 	@echo "  or something else"
 	@echo "   with this script"
 	@echo ""
-	@dart --version
+	@flutter --version
 
 -include tool/makefile/*.mk
