@@ -56,6 +56,10 @@ jobs:
       - name: 🗄️ Export pub cache directory
         run: export PUB_CACHE=/var/tmp/.pub_cache
       
+      - name: 👨‍⚕️ Flutter doctor
+        run: flutter doctor
+        timeout-minutes: 3
+      
       - name: 🚚 Get dependencies
         working-directory: ${{ env.working-directory }}
         run: flutter pub get

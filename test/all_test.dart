@@ -7,6 +7,6 @@ import 'package:table/table.dart';
 void main() {
   test('placeholder', () {
     expect(() => DataGrid(), returnsNormally);
-    expect(DataGrid, isA<DataGrid>());
+    expect(DataGrid(), isA<DataGrid>());
   });
 }
